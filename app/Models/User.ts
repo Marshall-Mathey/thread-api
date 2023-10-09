@@ -3,6 +3,7 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import { column, beforeSave, BaseModel, beforeCreate, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuid } from 'uuid'
 import Thread from './Thread'
+import Reply from './Reply'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -40,4 +41,7 @@ export default class User extends BaseModel {
 
   @hasMany(() => Thread)
   public threads: HasMany<typeof Thread>
+
+  @hasMany(() => Reply)
+  public replies: HasMany<typeof Reply>
 }

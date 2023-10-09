@@ -33,4 +33,6 @@ Route.group(() => {
   Route.get('threads', 'ThreadsController.index')
   Route.patch('threads/:id', 'ThreadsController.update').middleware(['auth'])
   Route.delete('threads/:id', 'ThreadsController.destroy').middleware(['auth'])
+
+  Route.post('threads/:thread_id/replies', 'RepliesController.store')
 }).prefix('api')

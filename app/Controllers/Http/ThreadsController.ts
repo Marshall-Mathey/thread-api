@@ -5,7 +5,7 @@ import UpdateThreadValidator from '../../Validators/UpdateThreadValidator'
 
 export default class ThreadsController {
   public async index ({ response }: HttpContextContract) {
-    const threads = await Thread.query().preload('user').preload('category')
+    const threads = await Thread.query().preload('user').preload('category').preload('replies')
 
     return response.ok(threads)
   }
@@ -17,12 +17,17 @@ export default class ThreadsController {
 
     await thread?.load('user')
     await thread?.load('category')
+    await thread?.load('replies')
 
     return response.created(thread)
   }
 
   public async show ({ params, response }: HttpContextContract) {
-    const thread = await Thread.query().where('id', params.id).preload('user').preload('category').firstOrFail()
+    const thread = await Thread.query().where('id', params.id)
+      .preload('user')
+      .preload('category')
+      .preload('replies')
+      .firstOrFail()
 
     return response.ok(thread)
   }
@@ -37,11 +42,12 @@ export default class ThreadsController {
 
     await thread.load('user')
     await thread.load('category')
+    await thread.load('replies')
 
     return response.ok(thread)
   }
 
-  public async destroy ({params}: HttpContextContract){
+  public async destroy ({ params }: HttpContextContract) {
     const thread = await Thread.findOrFail(params.id)
 
     await thread.delete()
