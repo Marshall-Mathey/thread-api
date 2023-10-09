@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 export default class Category extends BaseModel {
   @column({ isPrimary: true })
@@ -17,6 +17,6 @@ export default class Category extends BaseModel {
 
   @beforeCreate()
   public static generate_uuid_v4 (category: Category){
-    category.id = uuidv4()
+    category.id = uuid()
   }
 }
