@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, beforeCreate, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuid } from 'uuid'
+import Thread from './Thread'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -26,7 +27,7 @@ export default class User extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static generate_uuid_v4 (user: User){
+  public static generate_uuid_v4 (user: User) {
     user.id = uuid()
   }
 
@@ -36,4 +37,7 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  @hasMany(() => Thread)
+  public threads: HasMany<typeof Thread>
 }
