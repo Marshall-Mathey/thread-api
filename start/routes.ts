@@ -31,4 +31,6 @@ Route.group(() => {
   Route.post('threads', 'ThreadsController.store').middleware(['auth'])
   Route.get('threads/:id', 'ThreadsController.show')
   Route.get('threads', 'ThreadsController.index')
+  Route.patch('threads/:id', 'ThreadsController.update').middleware(['auth'])
+  Route.delete('threads/:id', 'ThreadsController.destroy').middleware(['auth'])
 }).prefix('api')
