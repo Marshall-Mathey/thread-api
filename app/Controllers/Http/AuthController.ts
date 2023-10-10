@@ -7,7 +7,7 @@ export default class AuthController {
     const payload = await request.validate(RegisterValidator)
     const user = User.create(payload)
     const token = await auth.login(user)
-    return token
+    return response.created(token)
   }
 
   public async login ({ request, response, auth }: HttpContextContract) {
@@ -16,7 +16,7 @@ export default class AuthController {
       const token = await auth.attempt(email, password)
       return token
     } catch (error) {
-      return response.badRequest('Invalid credentials')
+      return response.badRequest({message:'Invalid credentials'})
     }
   }
 }

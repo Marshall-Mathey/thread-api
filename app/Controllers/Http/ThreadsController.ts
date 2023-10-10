@@ -46,7 +46,7 @@ export default class ThreadsController {
       .preload('replies')
       .firstOrFail()
 
-    return response.ok(thread)
+    return response.ok({data: thread})
   }
 
   public async update ({ params, request, response, auth }: HttpContextContract) {
@@ -65,7 +65,7 @@ export default class ThreadsController {
     await thread.load('category')
     await thread.load('replies')
 
-    return response.ok(thread)
+    return response.ok({data: thread})
   }
 
   public async destroy ({ params, auth, response }: HttpContextContract) {
@@ -76,5 +76,6 @@ export default class ThreadsController {
     }
 
     await thread.delete()
+    return response.noContent()
   }
 }
