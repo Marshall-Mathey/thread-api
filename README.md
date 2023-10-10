@@ -4,11 +4,11 @@ Thread-API is a web application that allows you to create threads, threads can b
 
 ## Features
 
-- [ ] Authenticate with a username and password
-- [ ] Create threads with a title and content 
-- [ ] Comment threads with text
-- [ ] Edit or delete your own threads and comments
-- [ ] Search threads by title, content or author
+- [x] Authenticate with a username and password
+- [x] Create threads with a title and content 
+- [x] Comment threads with text
+- [x] Edit or delete your own threads
+- [x] Search threads by title, content or author
 
 ## Installation
 
@@ -39,18 +39,19 @@ PORT=3333 # the port on which the application will be launched
 HOST=127.0.0.1 # the IP address of the application
 NODE_ENV=development # the mode of execution of the application
 APP_KEY= # a secret key to encrypt sensitive data, to be generated with the command `node ace generate:key`
-DB_CONNECTION=mysql # the type of database used
-MYSQL_HOST=127.0.0.1 # the IP address of the database
-MYSQL_PORT=3306 # the port on which the database is accessible
-MYSQL_USER=root # the username to connect to the database
-MYSQL_PASSWORD= # the password to connect to the database
-MYSQL_DB_NAME=thread_api # the name of the database to use
+DB_CONNECTION=pg # the type of database used
+PG_HOST=127.0.0.1 # the IP address of the database
+PG_PORT=5432 # the port on which the database is accessible
+PG_USER=postgres # the username to connect to the database
+PG_PASSWORD= # the password to connect to the database
+PG_DB_NAME=thread_api # the name of the database to use
 ```
 
 Create the database and tables:
 
 ```bash
 node ace migration:run
+node ace db:seed
 ```
 
 Launch the application:
