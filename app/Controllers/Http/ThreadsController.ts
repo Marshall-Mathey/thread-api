@@ -4,8 +4,11 @@ import Thread from '../../Models/Thread'
 import UpdateThreadValidator from '../../Validators/UpdateThreadValidator'
 
 export default class ThreadsController {
-  public async index ({ response }: HttpContextContract) {
-    const threads = await Thread.query().preload('user').preload('category').preload('replies')
+  public async index ({ request, response }: HttpContextContract) {
+    const page = request.input('page', 1)
+    const perPage = request.input('per_page', 10)
+
+    const threads = await Thread.query().preload('user').preload('category').preload('replies').paginate(page, perPage)
 
     return response.ok(threads)
   }
