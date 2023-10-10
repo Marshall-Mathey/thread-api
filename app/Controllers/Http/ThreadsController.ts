@@ -7,8 +7,15 @@ export default class ThreadsController {
   public async index ({ request, response }: HttpContextContract) {
     const page = request.input('page', 1)
     const perPage = request.input('per_page', 10)
+    const userId = request.input('user_id')
+    const categoryId = request.input('category_id')
 
-    const threads = await Thread.query().preload('user').preload('category').preload('replies').paginate(page, perPage)
+    const threads = await Thread.query()
+      .if(userId, (query) => query.where('user_id', userId)).preload('user')
+      .if(categoryId, (query) => query.where('category_id', categoryId))
+      .preload('category')
+      .preload('replies')
+      .paginate(page, perPage)
 
     return response.ok(threads)
   }
