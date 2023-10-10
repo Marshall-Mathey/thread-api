@@ -1,6 +1,6 @@
 # thread-api
 
-Thread-API is a web application that allows you to create threads, threads can be commented, authentication is integrated. The project is designed with Adonisjs 5.9.0 and pnpm 8.8.0, a MySQL database.
+Thread-API is a web application that allows you to create threads, threads can be commented, authentication is integrated. The project is designed with Adonisjs 5.9.0 and pnpm 8.8.0, a PostgreSQL database.
 
 ## Features
 
@@ -12,7 +12,7 @@ Thread-API is a web application that allows you to create threads, threads can b
 
 ## Installation
 
-To install the project, you need to have Node.js 14 or higher, MySQL 8 or higher and pnpm 9.0 or higher installed on your machine.
+To install the project, you need to have Node.js 14 or higher, PostgreSQL 13.x or higher and pnpm 7.x or higher installed on your machine.
 
 Clone the GitHub repository:
 
